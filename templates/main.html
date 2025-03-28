@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-{%load static %}
-<html>
-<head>
-<title>Main</title>
-<link rel = "stylesheet" href = "{% static 'css/style.css' %}"
-</head>
-<body>
+{%extends 'layout.html'%}
 
+{%block title%}
+Home 
+{%endblock%}
+
+{%block content%}
 <h1>Home</h1>
-<p>Look at the other pages please</p>
-
-</body>
-</html>
+<p>Look at the other <a href = "/stocks">pages</a> please</p>
+{%endblock%}
 
