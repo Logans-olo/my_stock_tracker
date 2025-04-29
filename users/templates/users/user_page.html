@@ -1,0 +1,21 @@
+
+
+{%extends 'layout.html'%}
+
+{%block title%}
+{{user.username}}
+{%endblock%}
+
+{%block content%}
+<section>
+<h1>{{user.username}}</h1>
+        
+        <img 
+        class="banner"
+        src="{{user.banner.url}}"
+        />
+        <p>{{user.password }}</p>
+    </article>
+</section>
+{%endblock%}
+

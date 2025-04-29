@@ -1,0 +1,19 @@
+
+
+{%extends 'layout.html'%}
+
+{%block title%}
+Login as a User
+{%endblock%}
+
+{%block content%}
+<section>
+<h1>Login as a User</h1>
+<form class="form=with-validation" action="/users/login" method="post">
+    {% csrf_token %}
+{{ form }}
+    <button>Submit</button>
+</form>
+</section>
+{%endblock%}
+
