@@ -1,0 +1,10 @@
+from django.urls import include, path
+from . import views
+
+app_name = 'stocks'
+urlpatterns = [
+    path('', views.stock_register, name = 'stock_register'), 
+    path('stock_new', views.stock_new, name = "new-stock"),
+    path('<slug:slug>', views.stock_page, name="page"),
+]
+

@@ -1,0 +1,18 @@
+{%extends '../layout.html'%}
+
+{%block title%}
+New Stock
+{%endblock title%}
+
+{%block content%}
+<section>
+<h1>New Stock</h1>
+<form action = "{% url 'stocks:new-stock'%}" method = "post" enctype = "multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <button class = "form-submit"> Add Stock </button>
+
+</form>
+
+</section>
+{%endblock content%}
