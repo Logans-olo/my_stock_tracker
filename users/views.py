@@ -32,7 +32,7 @@ def login_view(request):
         if form.is_valid(): 
             #LOGIN HERE
             
-            return render(request, 'users/register.html')
+            return redirect('stocks:stock_register')
     else: 
         form = AuthenticationForm()
     return render(request, 'users/login.html', {"form": form })

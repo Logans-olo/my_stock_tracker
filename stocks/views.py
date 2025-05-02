@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Stock
 from . import forms
+from django.db import connection
 
 # Create your views here.
 def stock_register(request): 
@@ -27,10 +28,25 @@ def stock_query(request):
             k: v for k, v in form.cleaned_data.items() 
             if v not in [None, '']
         }
-        stocks = Stock.objects.filter(**filter_kwargs)
+        where_clauses = []
+        params = []
+    
+        for field, value in filter_kwargs.items():
+            where_clauses.append(f"{field} =  \"" + value + "%\"")  # Basic equality comparison
+            params.append(value)
+    
+    # Construct final query
+        sql = "SELECT * FROM Stocks_stock"  # Assuming your table is stocks_stock
+    
+        if where_clauses:
+            sql += " WHERE " +  field +  " LIKE " + "\"" + value + "%\""
+    
+    # Execute safely
+        #print(sql)
+        stocks = Stock.objects.raw(sql,)
+        #print(stocks)
     print("rendering")
-    return render(request, 'stocks/stock_query.html', 
-                  {'stocks': stocks , "form": form})
+    return render(request, 'stocks/stock_query.html', {'stocks': stocks , "form": form})
     
 
 def stock_new(request):
