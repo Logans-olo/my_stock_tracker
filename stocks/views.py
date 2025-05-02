@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Stock
 from . import forms
 
@@ -16,5 +16,13 @@ def stock_page(request, slug):
     return render(request, 'stocks/stock_page.html', {'stock' : stock})
 
 def stock_new(request):
-    form = forms.CreatePost()
+    
+    if request.method == 'POST': 
+        form = forms.CreatePost(request.POST)
+        if form.is_valid(): 
+            newstock = form.save(commit=False)
+            newstock.save()
+            return redirect('stocks:stock_register')
+    else:
+        form = forms.CreatePost()
     return render(request, 'stocks/stock_new.html', {"form": form})
