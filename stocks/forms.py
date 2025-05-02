@@ -7,3 +7,7 @@ class CreatePost(forms.ModelForm):
         model = models.Stock
         fields = ("stock_id", "stock_name", "slug")
     
+class QueryForm(forms.ModelForm):
+    class Meta:
+        model = models.Stock
+        fields = ('stock_id',)

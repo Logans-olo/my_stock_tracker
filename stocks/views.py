@@ -15,8 +15,27 @@ def stock_page(request, slug):
         return render(request, 'main.html')
     return render(request, 'stocks/stock_page.html', {'stock' : stock})
 
-def stock_new(request):
+
+def stock_query(request): 
+    #raise Exception("HELLOETHEHREHRHE")
+    print("request recieved")
+    form = forms.QueryForm(request.POST or None)
+    stocks = Stock.objects.none()  # Empty queryset by default
     
+    if request.method == 'POST' and form.is_valid():
+        filter_kwargs = {
+            k: v for k, v in form.cleaned_data.items() 
+            if v not in [None, '']
+        }
+        stocks = Stock.objects.filter(**filter_kwargs)
+    print("rendering")
+    return render(request, 'stocks/stock_query.html', 
+                  {'stocks': stocks , "form": form})
+    
+
+def stock_new(request):
+    #raise Exception("")
+    print("Hello there")
     if request.method == 'POST': 
         form = forms.CreatePost(request.POST)
         if form.is_valid(): 

@@ -1,0 +1,32 @@
+{%extends 'layout.html'%}
+
+{%block title%}
+Stock
+{%endblock%}
+
+{%block content%}
+
+    <section>
+        <h1>Query Stock</h1>
+        <form class = "form-with-validation" method = "post">
+            {% csrf_token %}
+            {{form}}
+            <button class = "form-submit"> Query by ID </button>
+        
+        </form>
+    </section>
+{%if stocks%}
+    <section>
+    {%for stock in stocks%}
+        <article>
+
+            <h2>
+                <a href = "{% url 'stocks:page' slug=stock.slug %}">
+                {{stock.stock_id}} </a>
+            </h2>
+            <p></p>
+        </article>
+{%endfor%}
+</section>
+{%endif%}
+{%endblock content%}
